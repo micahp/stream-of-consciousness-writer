@@ -24,15 +24,34 @@ $(document).ready(function(){
       resetAll();
   });
 
-  typingArea.on("keydown", function() {
-      if(!timerEnded) {
+  typingArea.on("keydown", function(event) {
+      if(!timerEnded && event.keyCode !== 8) { //ignore backspace key & check timer ended
           typingArea.removeClass("fade-out");
           lastKeypressTime = Date.now();
-          if (!started) {
+
+          let keycode = event.keyCode;
+
+          let valid = 
+              (keycode > 47 && keycode < 58)   || // number keys
+              keycode == 32 || keycode == 13   || // spacebar & return key(s) (if you want to allow carriage returns)
+              (keycode > 64 && keycode < 91)   && // letter keys
+              (keycode < 112 || keycode > 123) || // function keys
+              (keycode > 95 && keycode < 112)  || // numpad keys
+              (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
+              (keycode > 218 && keycode < 223);   // [\]' (in order)      
+              
+          const controlKeyCodes = [8, 9, 13, 16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46];
+
+          if (!started && valid && !controlKeyCodes.includes(keycode)) {
               startCountdown();
               started = true;
           }
       }
+  });
+
+   // Prevent pasting into text area
+  typingArea.on("paste", function(event) {
+    event.preventDefault();
   });
 
   $("#restart").on("click", function() {

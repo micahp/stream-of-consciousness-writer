@@ -15,6 +15,16 @@
     animation: fadeOut 10s;
 }
 
+.write-for-text {
+    margin: auto;
+    padding-right: 10px;
+}
+
+#timer {
+    padding-left: 10px;
+    margin: auto;
+}
+
 @keyframes fadeOut {
     from {opacity: 1;}
     to {opacity: 0.4;}
@@ -29,7 +39,7 @@
 
 #wordCount {
     text-align: center;
-    background-color: white;
+    background-color: transparent;
 }
 
 .overlay {
@@ -60,4 +70,39 @@
     text-align: center;
     background-color: white;
 }
+
+/* Small screens (mobile) */
+@media only screen and (max-width: 600px) {
+    #typingArea {
+        font-size: 16px;
+        height: 350px;
+    }
+    .btn-group-toggle {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .btn-group-toggle > .btn {
+        flex-grow: 1;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Medium screens (tablets) */
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    #typingArea {
+        font-size: 18px;
+    }
+}
+
+/* Large screens (laptops, desktops) */
+@media only screen and (min-width: 900px) {
+    #typingArea {
+        font-size: 20px;
+    }
+}
+
+
+
 
